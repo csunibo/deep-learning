@@ -53,7 +53,7 @@ We have to answer to these questions first though:
 
 
 ### Learning rate
-The _dimension of the step_ in the direction of the gradient is the so called _learning rate_, traditionally denoted with $µ$.
+The _dimension of the step_ in the direction of the gradient is the so called _learning rate_, traditionally denoted with $\mu$.
 $$w \leftarrow w - \micro \nabla L(w)$$
 The learning rate is an hyperparameter that can be configured by the user. Its evolution during training is governed by software components called _optimizers_ (more about them later).
 
