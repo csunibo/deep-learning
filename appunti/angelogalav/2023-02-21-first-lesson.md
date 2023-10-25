@@ -18,7 +18,7 @@ In a regression problem, we have a set of points, and we need to fit a line into
 - Step 2
   - Fix a way to decide when a line is better than another (loss function). For instance, using mean square error (mse).
 - Step 3 - Try to tune the parameters in order to reduce the loss (training).
-  ![[regression-steps.png]]
+  ![](images/regression-steps.png)
 
 ## Why Learning?
 
