@@ -62,7 +62,7 @@ The learning rate is an hyperparameter that can be configured by the user. Its e
 ### Examples
 
 ##### Linear regression example (fitting a line)
-We want to fit a line through a set of points $<x_i , y_i>$. 
+We want to fit a line through a set of points $\langle x_i, y_i \rangle$. 
 
 - Model: a line $y = ax + b$
 - Loss: $1/2 * \sum_i (y_i - (ax_i + b))^2$
