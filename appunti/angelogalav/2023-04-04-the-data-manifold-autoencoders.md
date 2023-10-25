@@ -34,10 +34,10 @@ Moreover, due their regularities, we expect them to be organized along some disc
 ### The Manifold issue
 - Suppose we have a space with _two features_ (a cartesian plane), and our data occupy the _manifold of dimension_ 1 (the line in the picture), along the dotted line described in the following picture.
 - Suppose moreover that our data are splitted in two categories (yellow and blue) and we want to perform their classification
-![[manifold_example.png]]
+![[manifold-example.png]]
 We have little knowledge of where the classifier will draw the boundary. A _tiny change_ in the _data features_ may easily result in a _missclassification_.
 Observe that we are escaping from the actual data manifold..
-![[manifold_example_2.png]]
+![[manifold-example-2.png]]
 As we can see, it is very easy to move the circled sample _outside of the boundary_, such that it is misclassified. 
 
 Now imagine the possibilities in a space with hundreads or thousands of dimensions...
@@ -90,4 +90,4 @@ Especially, an amusing and simple to understand topic.
 The latent encoding of data is meant to capture the main components of the data features. We can hence expect to easily detect anomalies by _looking at points with abnormal latent values_. Equivalently, we may look at points with a reconstruction below the expected quality.
 
 Autoencoding is data specific: the autoencoder works well on data similar to those it was trained on. If applied on different data (anomaly), it will _perform poorly_.
-![[anomaly_detection.png]]
+![[anomaly-detection.png]]

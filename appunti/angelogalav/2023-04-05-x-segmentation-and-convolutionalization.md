@@ -4,10 +4,10 @@ _Segmentation_ is an image processing topic which focuses on dividing an image i
 
 ### Semantic Segmentation
 __Semantic segmentation__: classify each pixel in an image according to the object category it belongs to.
-![[semantic_seg.png]]
+![[semantic-seg.png]]
 Building supervised training set is expensive, since it requires a complex human operation.
 The _label is itself an image_, with a different color for each category:
-![[segmentation_example_2.png]]
+![[segmentation-example-2.png]]
 For this reason, semantic segmentation can be regarded as a special case of Image-to-image transformation.
 
 # Convolutionalization
