@@ -6,17 +6,17 @@ This final part is usually not very, since it is comprised of only 2/3 dense lay
 
 ## ResNet - Residual Learning
 This type of CNN is also used for image processing, and makes use of _Residual Learning_, which is described by this image:
-![[residual_learning.png]]
+![](residual_learning.png)
 In Residual Learning, we have some kind of connection from the input to the output. In particular, instead of learning a function $F(x)$ you try to learn $F(x) + x$.
 
 The intuition of this approach may be better understood by this image:
-![[res_learning_2.png]]
+![](res_learning_2.png)
 Essentially, we are adding a _residual computation_ to our input, so we are computing a kind of _delta_ (which is F(x)) to the input, it is a kind of residual that can help in the computation. 
 In general, it can be seen as a way to see if our input has some kind of improvement or not. 
 
 You add a residual shortcut connection every 2-3 layers.
 Inception Resnet is an example of a such an architecture.
-![[residual_example.png]]
+![](residual_example.png)
 The __main advantage__ is that along these links, you have a _better backpropagation_ of the _loss_. It's true that if use RELU (Rectified Linear Units) instead of, say a sigmoid, you do not have the problem of vanishing gradient, but in any case there's a quick degradation of the loss going deeper and deeper in the net. 
 Instead, using this method, ==there's no _degradation of the gradient_==. 
 
@@ -25,7 +25,7 @@ Not well understood yet. The usual explanation is that during back propagation, 
 
 #### Residual Learning - Sum or concatenation?
 The “sum” operation can be interpreted in a liberal way. A common variant consists in concatenating (_skip connection_) instead of adding (usually along the channel axis):
-![[sum-or-concatenation.png]]
+![](sum-or-concatenation.png)
 By using a concatenation, we are usually just skipping some parts of the network. 
 
 The point is to induce the net to learn different filters.
@@ -67,24 +67,24 @@ Transferring knowledge from problem A to problem B makes sense if:
 
 In all layers, you typically have a _trainable parameter_ (which is a boolean), and if it false the learning on this layer freezes.
 
-![[transfer_learning_cnns.png]]
+![](transfer_learning_cnns.png)
 
 In this type of learning, we can also do some _fine-tuning_ by unfreezing the first part of the network after the dense layer has already been trained, thus training also the first part of the network on the specific data of the transferred network. 
 Finetuning is always dangerous, and there's a risk of overfitting and degrading (possibly) good information.
 
 ##### Expectations of transfer learning
-![[what_we_expect.png]]
+![](what_we_expect.png)
 
 # Backpropagation for CNNs
 To understand how backpropagation works in CNNs, we need to understand how do we have to _change the weights_ of the kernel during backpropagation
 
 Since when doing a convolution we are transforming (for example) an input of dimension 4x4 into an output of dimension 2x2. 
-![[cnn_explanation.png]]
+![](cnn_explanation.png)
 This can be seen also in the image above. Essentially, what we are trying to do can be also done _through a linear transformation_, involving weights. 
 
 ### Matrix for applying CNNs linearly
 This operation, when done in a linear way, involves a _matrix_ of this kind:
-![[convolution_matrix.png]]
+![](convolution_matrix.png)
 Each column corresponds _to a different application of the kernel_. 
 $w_{i,j}$ is a kernel weight, with i and j being the row and column of the kernel respectively.
 The matrix has been transposed for convenience.
@@ -96,7 +96,7 @@ Why are we trying to find this correlation between linear layers and convolution
 Well, it's because in linear layers _we know how to apply backpropagation_. 
 
 However there's a catch: when we backpropagate, each parameter of the linear matrix is transformed in a different way, so the ==partial derivativative of the loss function for each one of the parameters of the linear layer will be different==.  
-![[convolution_matrix_mod.png]]
+![](convolution_matrix_mod.png)
 To solve this problem, we update the kernel with the _average_ of the updates made to each parameter. 
 
 ## Transposed convolutions
@@ -108,19 +108,19 @@ In some cases, we may be interested to _upsample_ the input, e.g. for
 When upsampling, we can also use bilinear transformations. But for now, we'll just focus on transposed convolutions. 
 
 A transposed convolution (sometimes called deconvolution) can be thought as a normal convolution with _subunitarian_ stride. To mimic subunitarian stride, we must first properly _upsample the input_ (e.g. inserting empty rows and columns) and _then apply a single strided convolution_ like in this image:
-![[trans_cnn.png]]
+![](trans_cnn.png)
 
 In this way, we can have an output that is bigger in size than the input. 
 
 ## Dilated Convolutions
 Sometimes, when applying convolutions, the _kernel may be too small_, and if we increase the size of the kernel, it may become too computationally complex for our needs. 
 Dilated convolutions are just normal convolutions with holes.
-![[dilation.png]]
+![](dilation.png)
 
 _It enlarges the receptive fields_, keeping a low number of parameters. Might be useful in first layers, when working on high resolution images.
 
 They are also used in __Temporal Conovlutional Networks (TCNs)__ to process long input sequences:
-![[temporal_conv.png]]
+![](temporal_conv.png)
 
 >[!WARNING]
 > Remember:
@@ -141,7 +141,7 @@ Essentially, we are computing a normalization for each batch, and everytime we f
 At each training iteration, the input is normalized according to _batch (moving) statistics_, subtracting the _mean_ $µ^B$ and dividing by the _standard deviation_ $σ^B$ . 
 - Then, an opposite transformation (denormalization) is applied based on _learned_ parameters $γ$ (scale, equivalent to a standard deviation) and $\beta$ (center, equivalent to a mean). These parameters allow essentially to cancel the normalization operation according to what the network thinks that it's better to do. 
 	- This operation can also be disabled.
-![[batch_normalization.png]]
+![](batch_normalization.png)
 $µ^B$ and $σ^B$ are the batch statistics. 
 
 >[!WARNING]
@@ -156,7 +156,7 @@ Typically, after training, we use the entire dataset to compute stable estimates
 Once training is concluded, statistics (over a given training set) do not change any more.
 
 ### Other forms of normalization
-![[normalizations_types.png]]
+![](normalizations_types.png)
 Each subplot shows a feature map tensor, with N as the batch axis, C as the channel axis, and (H, W) as the spatial axes.
 The pixels in blue are _normalized_ by _the same mean and variance_, computed by aggregating the values of these pixels.
 

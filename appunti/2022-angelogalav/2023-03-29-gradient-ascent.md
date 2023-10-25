@@ -8,7 +8,7 @@ In the highest layers, neurons may start _recognizing patterns_ similar to _feat
 
 ## Visualization of hidden layers
 Our goal: find a way to _visualize the kind of patterns a specific neuron gets activated by_.
-![[visualize.png]]
+![](visualize.png)
 The loss function $L(θ, x)$ of a NN depends on the _parameters_ $θ$ and the _input_ $x$. 
 During training, we fix $x$ and compute the partial derivative of $L(θ, x)$ w.r.t the parameters $θ$ to adjust them in order to decrease the loss.
 In the same way, _we can fix_ $θ$ and use partial derivatives w.r.t. input pixels in order to syntehsize images _minimizing the loss_. 
@@ -16,7 +16,7 @@ In this way, we can compute an activation of some neuron, and understand how I s
 
 ## The gradient ascent technique
 Start with a random image, e.g.
-![[noise.png]]
+![](noise.png)
 - do _a forward pass_ using this image $x$ as input to the network to _compute the activation_ $a_i(x)$ caused by $x$ at some neuron (or at a whole layer) 
 - do _a backward pass_ to compute the gradient of $\dfrac{∂ai(x)}{∂x}$ of $a_i(x)$ with respect to each pixel of the input image (this is the actual gradient ascent step). 
 - _modify the image_ adding a small percentage of the gradient $\dfrac{∂ai(x)}{∂x}$ and repeat the process until we get _a sufficiently high activation of the neuron_.
@@ -26,7 +26,7 @@ Start with a random image, e.g.
 > It's called gradient ascent only because we are trying to _increase_ a value (which is the value of the activation of the neuron). 
 
 #### Example of visualization
-![[visualization-example.png]]
+![](visualization-example.png)
 
 ## A different approach
 A different approach would be in using an input image and trying to understand which parts of the image are actually recognized by the network. 
@@ -37,17 +37,17 @@ Essentially, we are trying to understand the inner representation at some layer 
 ### The technique
 - Goal: given an input image $x_0$ with an internal representation $Θ_0 = Θ(x_0)$, generate a different image $x$ such that $Θ(x) = Θ_0$, 
 - Approach: via gradient ascent starting form a noise image. _Instead_ of optimizing towards a given category or the _activation_ of a neuron, _minimize the distance_ from $Θ_0$:
-![[formula-gradient-ascent.png]]
+![](formula-gradient-ascent.png)
 
 Obviously, it is much simpler to minimize this function when we are at a layer that is close to the start of the network, since this is when the result is much more similar to the starting image.
 - The more we traverse the network, the more the input becomes deconstructed and so it is more difficult to reconstruct. 
 
 #### Results
-![[results-ga.png]]
+![](results-ga.png)
 As we can see, the input becomes progressively fuzzier, and it seems that our network almost deconstructs the whole image. 
 
 #### Inceptionism
-![[inceptionism.png]]
+![](inceptionism.png)
 you've seen this shit for sure in some creepy youtube video. 
 Essentially, it is image manipulation that injects inside the image the notions that we have just said, by applying the gradient descent techniques to particular layers of the network. 
 \[this is what asperti said, I know it is not quite clear but in the next paragraph it will be explained better\]
@@ -68,9 +68,9 @@ Lower layers will produce strokes or simple ornament-like patterns, because thos
 
 ## Style transfer
 The gradient ascent technique can also be adapted to superimpose a _specific style_ to a given content:
-![[style-transfer.png]]
+![](style-transfer.png)
 To capture the style of another image, we can use techniquies that come from the standard image processing field. In particular, we add a _feature space_ on top of the original CNN representations which _computes correlations_ between _the different features maps_ (channels) at each given layer. A technique already used to compute image textures.
-![[style-recontruction.png]]
+![](style-recontruction.png)
 
 #### Gram Matrix
 We know that at layer $l$:
@@ -91,7 +91,7 @@ Different combinations varying the reconstrution layer (rows) and the relevance 
 
 #### Variants and improvements (original work of this topic)
 The original work did not use the gradient descent technique, instead it use something like this:
-![[the-model-style-trans.png]]
+![](the-model-style-trans.png)
 We can see that the loss function is represented as a network (in particula the _pre-trained_ network VGG-16).
 
 The input image $x$ could be some _random noise_, that is fed inside an _image transformation network_, which in turn is trained to transform input images into output images. 
@@ -105,7 +105,7 @@ The image transform network is the only part of this model that involves some tr
 
 ### How to fool a NN
 Since we have many pixels, a tiny (imperceptible to humans!), consistent perturbation of all of them is able to fool the classifier.
-![[nn-fool.png]]
+![](nn-fool.png)
 
 ## Adversarial attacks and NNs as black boxes
 The previous technique, being based on gradient ascent, _requires the knowledge of the neural_ net in order to fool it.
@@ -114,7 +114,7 @@ These evolutionary techniques create images optimized so that they generate high
 The evolutionary approach is this:
 - start with a random population of images 
 - alternately apply selection (keep best) and mutation (random perturbation/crossover)
-![[adversarial-attacks-example.png]]
+![](adversarial-attacks-example.png)
 As we can see in the image, they were able to produce not only “noisy” adversarial images, but also geometrical examples with high regularities (meaningful for humans).
 - In the _indirect enconding_, rather than modifying pixels of an image directly, we simply create images in a parametric way, using geometrical shapes. The algorithm then acts on the parameters of the shapes. The result is are more complex images that is not just simple noise. 
 - Indirect encoding is much slower. 

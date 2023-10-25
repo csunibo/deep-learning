@@ -17,7 +17,7 @@ Typically, the quality of each individual bounding box is evaluated vs. the corr
 $$
 IoU(A,B) = \dfrac{|A \cap B|}{|A \cup B|}
 $$
-![[intersection-over-union.png]]
+![](intersection-over-union.png)
 Essentially, we measure how good is a prediction by checking how much the 2 boxes stack up/ how close they are. 
 
 Then, these bounding boxes be summed up for all detections, and suitably combined with classification errors.
@@ -31,7 +31,7 @@ There are 2 main approaches:
 	- Especially suited for real-time applications. 
 
 ## YOLO’s architecture
-![[yolo.png]]
+![](yolo.png)
 Yolo is a _Fully Convolutional Network_. The input is _progressively downsampled_ by a factor $2^5 = 32$. This is done in order to _increase the receptive field of our neurons_ (each neuron at the end musts see a sufficiently large portion of the image).
 For instance, an input image of dimension 416x416 would be reduced to a grid of neurons of dimension 13x13, which is _the feature map_.
 
@@ -45,7 +45,7 @@ In YOLO, a _single neuron_ is responsible for _detection_: the ==one whose grid-
 We have 13x13 neurons in the feature map. 
 - Depth-wise, we have $(B \times (5 + C))$ _entries_, where $B$ represents the _number of bounding boxes_ each cell can predict (say, 3), and $C$ is the number of _different object categories_. 
 - Each bounding box has $5 + C$ attributes, which describe the _center coordinates_ (2), the _dimensions_ (2), the _objectness score_ (1) and $C$ class confidences (1 for each prediction, usually is 3).
-![[yolo-feature-map.png]]
+![](yolo-feature-map.png)
 
 #### Anchor Boxes
 Trying to directly predict width and the height of the bounding box leads to _unstable gradients_ during _training_.
@@ -61,37 +61,37 @@ As usual, we shall use $v$ to denote a true value, and $\hat v$ to denote the co
 
 #### Localization loss
 The localization loss is:
-![[localization-loss.png]]
+![](localization-loss.png)
 where $i$ ranges over cells, and $j$ over bounding boxes.
 - $1^{obj}_{ij}$ is a _delta function_ indicating whether the _$j$-th bounding box of the cell $i$ is responsible for the object prediction_. 
 	- Essentially, it is a mapping function containing 0 everywhere except for the neuron that is supposed to do the localization. This essentially masks the predictions of the other neurons. 
 
 #### Classification loss
 The classification loss is the sum of two components, relative to the _objectness confidence_ and the _actual classification_:
-![[classification-loss.png]]
+![](classification-loss.png)
 $λ_{noobj}$ is a configurable parameter meant to down-weigth the loss contributed by “background” cells containing no objects. This is important because they are a large majority.
 
 #### Final result
 The whole loss is:
-![[final-loss.png]]
+![](final-loss.png)
 $λ_{coord}$ is an additional parameter, balancing the contribution between $L_{loc}$ and $L_{cls}$. 
 In YOLO, $λ_{coord} = 5$ and $λ_{noobj} = 0.5$.
 
 ## Multi scale processing
 Here's an overview of image processing techniques for object detection throughout history. 
-![[image-pyramid1.png]]
+![](image-pyramid1.png)
 - The older approach to object detection from the 2010s used a __featurized image pyramid__. With this approach, features are computed on each of the image scales independently, which is _slow_.
 	- Essentially, images were scaled and rescaled multiple times in order to find the important features of the image.
 
 - First systems for fast object detection (like YOLO v1) opted to use only higher level features at the _smallest scale_ (__single feature map__). This usually _compromises detection of small objects_.
-![[image-pyramid2.png]]
+![](image-pyramid2.png)
 - An alternative (Single Shot Detector - SSD) is to reuse the _pyramidal feature hierarchy_ computed by a ConvNet as if it were a _featurized image pyramid_.
 - Modern Systems (FPN, RetinaNet, YOLOv3) recombine features along a __backward pathway__. This is as fast as (b) and (c), but more accurate. 
 
 In the figures, feature maps are indicated by blue outlines and thicker outlines denote semantically stronger features.
 
 #### Featurized Image Pyramid
-![[image-pyramid3.png]]
+![](image-pyramid3.png)
 - Bottom-up pathway is the normal feedforward computation. 
 - _Top-down_ pathway goes in the inverse direction, adding coarse but _semantically stronger feature maps_ back into the previous pyramid levels of a larger size via lateral connections.
 	- First, the higher-level features are _spatially upsampled_. 
@@ -104,7 +104,7 @@ Essentially, we have to consider that we have a huge amount of predictions, sinc
 YOLOv3 predicts feature maps at scales 13, 26 and 52.
 
 For example, if we have a situation like this:
-![[different-feature-maps.png]]
+![](different-feature-maps.png)
 At the end, we have $((13×13)+(26×26)+(52×52)) \times 3 = 10647$ bounding boxes, each one of dimension $85$ (4 coordinates, 1 confidence, 80 class probabilities). 
 How can we reduce this number to the few bounding boxes we expect?
 

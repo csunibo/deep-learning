@@ -21,7 +21,7 @@ What about the prior?
 	- ⇒ slightly more complex; not clearly beneficial
 
 The architecture of CVAE is this:
-![[cvae-arch.png]]
+![](cvae-arch.png)
 
 ### Additional info on CVAE 
 By giving the label info to bo the encoder and the decoder, they can essentially exploit that information in some ways. In general, for example, ==they can use that info for encoding the information (instead of encoding the data into the latent space)==.
@@ -32,7 +32,7 @@ Also, in general, VAE have a more regular latent space wrt to general autoencond
 
 ## Conditional GANs 
 The generator takes _in input the condition_, in addition to the noise.
-![[cond-gans.png]]
+![](cond-gans.png)
 What about the discriminator?
 - use the condition to discriminate fakes for real of the given class (__Conditional GAN__)
 	- It gives the same condition given to the generator as an additional input to discriminator. 
@@ -45,8 +45,8 @@ Notation:
 - $p_θ(x, c)$ is the _joint distibution of __generated__ data_
 - $q_θ(c|x)$ is the __classifier__
 
-In addition to the usual [[2023-04-19 - Generative Models 2#GAN's loss function|GAN objective]], we also try to minimize the following quantities:
-![[loss-function.png]]
+In addition to the usual [[2023-04-19 - Generative Models 2#GAN's loss function|GAN objective), we also try to minimize the following quantities:
+![](loss-function.png)
 - term 1: the _classifier should be consistent with the real distribution_
 	- So, it's the dedicated to the classifier.
 - term 2: the generator must create images easy to classify by the discriminator. 
@@ -54,7 +54,7 @@ In addition to the usual [[2023-04-19 - Generative Models 2#GAN's loss function|
 The second term has always been criticized, so in InfoGAN, for example, we only have the _first term_. 
 - The second term helps to generate images far from boundaries between classes, hence, likely more sharp. But what if _real images are close to boundaries_?
 	- This is a problem of almost every GAN: some images are very easy to generate, while others provide a very bad result. 
-- It has also been criticized because the classifier can suffer from the [[2023-04-19 - Generative Models 2#GANs problems|Mode Collapse]], too.
+- It has also been criticized because the classifier can suffer from the [[2023-04-19 - Generative Models 2#GANs problems|Mode Collapse), too.
 
 ## Concrete handling of the condition 
 In conditional networks, we pass the label/condition as an additional input. How is this input going to be processed? If we need to add it to a dense layer, we just concatenate the label to the input. If we need to add it to a convolutional layer, we have two basic ways: 
@@ -63,11 +63,11 @@ In conditional networks, we pass the label/condition as an additional input. How
 
 ### Vectorization
 We essentially _repeat the label_ (typically in categorical form) for _every input neuron_, and _stack them as new channels_.
-![[vectorization.png]]
+![](vectorization.png)
 
 ### FILM 
 Idea: use the condition to _give a different weight to each feature_ (each channel).
 
 We use the condition to generate two vectors $γ$ and $β$ with size equal to the channels of the layer. Them we rescale layers by $γ$ and add $β$.
-![[film.png]]
+![](film.png)
 It's less invasive than parametrizing the weights. Nevertheless, Vectorization remains the most typical and the most easy to use though. 
