@@ -9,14 +9,14 @@ Suppose we have a single layer NN.
 ![[perceptron.png]]
 
 For the moment, let's suppose that we have a binary function as an activation function:
-![[perceptron_formula.png]]
+![[perceptron-formula.png]]
 The bias allow us to _fix_ the _threshold_ that we're _interested_ in. 
 
 ## Hyperplane
 The set of points:
-![[simple_equation.png]]
+![[simple-equation.png]]
 defines a hyperplane in the space of the variables $x_i$. 
-![[line_example.png]]
+![[line-example.png]]
 
 The _hyperplane_ divides the space in _two parts_: 
 - to one of them (above the line) the perceptron gives value 1,
@@ -25,17 +25,17 @@ The _hyperplane_ divides the space in _two parts_:
 ### NN logical connections
 ![[nand.png]]
 and the answer is...
-![[linear_perceptron_nand.png]]
+![[linear-perceptron-nand.png]]
 
 But we _cant_ represent _every_ circuit with a linear perceptron (i.e. XOR).  
 
 Can we recognize these patterns with a perceptron (aka binary threshold)?
-![[pixels_lp.png]]
+![[pixels-lp.png]]
 __No__, each pixel should individually contribute to the classification, that is not the case (more in the next slides). 
 So considering more than one pixel at a time it's not a linear task. 
 
 Let us e.g. consider the first pixel, and suppose it is black (the white case is symmetric). 
-![[pixels_lp_2.png]]
+![[pixels-lp-2.png]]
 does this improve our knowledge for the purposes of classification?
 No, since we have still the same probability to have a good or a bad example.
 
@@ -48,7 +48,7 @@ When we want to use a linear technique for learning, we have to ask ourself, is 
 - we know that nand is logically complete (i.e. we can compute any connective with nands)
 - so: why perceptrons are not complete? 
 	- answer: because we need _to compose them_ and consider _Multi-layer perceptrons_. 
-![[xor_perceptrons.png]]
+![[xor-perceptrons.png]]
 
 So... since shallow networks are already complete, why going for _deep networks_?
 With deep nets, the same function may be computed with _less neural units_ (Cohen, et al.)

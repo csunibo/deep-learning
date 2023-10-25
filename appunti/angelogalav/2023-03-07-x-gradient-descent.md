@@ -16,7 +16,7 @@ This is akin to reinforcement learning, but is _very inefficient_ and has a high
 
 
 Instead of making a random adjustement of the parameters, we try to predict the parameters. 
-![[reducing_loss.png]]
+![[reducing-loss.png]]
 $w$ is the current value of the loss function, and we should move left (in this example) to decrease the loss. 
 We also have to compute how long we have to move to decrease the loss. 
 
@@ -27,7 +27,7 @@ Obviously, the mathematical tool we need to find the movement direction are _der
 
 ##### Why binary threshold is no good for learning
 Derivative is 0 everywhere (and infinite in correspondence of the jump).
-![[threshold_function.png]]
+![[threshold-function.png]]
 
 
 ## The gradient
@@ -36,7 +36,7 @@ If we have many parameters, we have a different derivative for each of them (the
 
 With multiple parameters, the magnitude of partial derivatives becomes relevant, since it governs the orientation of gradient. 
 
-![[nabla_stuff.png]]
+![[nabla-stuff.png]]
 
 The gradient points in the direction of _steepest __ascent___.
 
@@ -68,7 +68,7 @@ We want to fit a line through a set of points $<x_i , y_i>$.
 - Loss: $1/2 * \sum_i (y_i - (ax_i + b))^2$
 - $\dfrac{\partial L}{\partial a} = - \sum_i ((y_i - ax_i + b)x_i)$
 - $\dfrac{\partial L}{\partial b} = - \sum_i (y_i - ax_i + b)$
-![[line_fit_demo.png]]
+![[line-fit-demo.png]]
 The previous problem is a linear optimization problem, that can be easily solved analytically. Why taking a different approach? I the analytic solution only works in the linear case, and for fixed error functions I usually, it is not compatible with regularizers I the backpropagation method can be generalized to multi-layer non-linear networks
 
 #### Some notes on gradient descent
@@ -94,7 +94,7 @@ Each asnwer to these questions returns an new _optimizer_ definition.
 
 
 ### Online vs Batch learning
-![[online_vs_batch_learning.png]]
+![[online-vs-batch-learning.png]]
 - Fullbatch on all training samples: gradient points to the direction of steepest descent on the error surface (perpendicular to contour lines of the error surface) 
 - Online (one sample at a time) gradient zig-zags around the direction of the steepest descent. 
 - Minibatch (random subset of training samples): a good compromise.

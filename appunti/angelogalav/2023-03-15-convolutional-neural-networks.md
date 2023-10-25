@@ -33,7 +33,7 @@ $$
 We essentially are computing $\dfrac{y_1 - y_0}{x_1 - x_0}$.
 
 Usually, $h = 1$ (since we can't take 0) pixel, and negleting the costant 1/2 we compute with the following filter $$[-1 \ 0 \ 1]$$This kernel is quite interesting in image processing and allows us to approximate a derivative of the input image (w.r.t. the difference of the intensity of the pixel) in a specific position. This kernel can be applied both _horizontally_ and _vertically_. 
-![[finite_central_example.png]]
+![[finite-central-example.png]]
 From the input image we extract the visible contours, using different orientations of the kernel. 
 
 In general, the kernel is a _pattern_ of the image _that we are interested in_. We can have many, complex patterns, we look for this pattern over the input.
@@ -58,7 +58,7 @@ array([[-1.,  0.,  1.],
 ```
 
 And the result is:
-![[result_cnn_1.png]]
+![[result-cnn-1.png]]
 
 A kernel that would shift the image looks something like this:
 ```

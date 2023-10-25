@@ -111,7 +111,7 @@ The output computed, usually, is a probability distribution.
 As we know, the __loss function__ is the _difference_ between the _actual output_ of the model and the _ground truth_. The problem is, what loss functions should we use for _comparing probability distributions_?
 - We could treat them as “normal functions”, and use e.g. _quadratic distance_ between true and predicted probabilities.
 - Can we do better? For instance, in logistic regression we do not use mean squared error, but use negative log-likelihood. Why?
-![[comparing_lossess.png]]
+![[comparing-lossess.png]]
 Probability distributions can be compared according to many different metrics. There are two main techniques: 
 - you consider their _difference_ $P - Q$ (e.g. Wasserstein distance, it tries to measure the amount of "work" needed to reshape the curve to the one of the ground truth) 
 - you consider their _ratio_ $P/Q$ (e.g. __Kullback Leibler divergence__)
@@ -133,7 +133,7 @@ A learning objective can be the _minimization_ fo the Kullback-Leiber divergence
 
 ### Cross-Entropy and Log-likelihood
 To better understand, let us consider the case of the binary classification. 
-![[cross_entropy_log_likelihood.png]]
+![[cross-entropy-log-likelihood.png]]
 
 If $x = 1$, then the probability of $P(y = 1 | x)$ is 1. 
 

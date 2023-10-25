@@ -24,14 +24,14 @@ So, each CNN layer usually has 4 dimensions:
 What do we do when our layer has more than 1 channel? In this case, ==the kernel operates on all the channels together==.  
 For this reason, a kernel of 1x1 operates just on the channels.
 
-![[layer_configuration_params.png]]
+![[layer-configuration-params.png]]
 
 ##### Reducing channels
 If in a layer we reduce the channels, i.e. 64 to 32, our CNN kinda behaves like PCA, since it compresses the 64 channels to 32, preserving the information that is important to us. 
 
 Unless stated differently (e.g. in separable convolutions), ==_a filter operates on all input channels in parallel_==. So, if the input layer has depth $D$, and the kernel size is $N \times M$, the actual dimension of the filter will be $N \times M \times D$. 
 The convolution kernel is tasked with _simultaneously mapping cross-channel correlations and spatial correlations_.
-![[3d_CNN.png]]
+![[3d-cnn.png]]
 
 ### Dimension of the output
 The spatial dimension of each output feature map depends form the spatial dimension of the input, the padding, and the stride. Along _each axes_ the dimension of the output is given by the formula:
@@ -48,7 +48,7 @@ where:
 - The width of the input (gray) is $W$=7. 
 - The kernel has dimension $K$=3 with fixed weights \[1, 0, −1\] 
 - Padding is zero
-![[example_cnn.png]]
+![[example-cnn.png]]
 - In the first case, the stride is $S=1$. We get $(W − K)/S + 1 = 5$ output values. 
 - In the second case, the stride is $S=2$. We get $(W − K)/S + 1 = 3$ output values.
 
@@ -68,7 +68,7 @@ This is also true in Keras.
 - The __receptive field__ of a (deep, hidden) neuron is the _dimension of the input_ region _influencing_ it. 
 - It is equal to the dimension of an input image producing (without padding) an output with dimension 1.
 - ==A neuron cannot see anything outside its receptive field!==
-![[receptive_field.png]]
+![[receptive-field.png]]
 
 This notion is only true in CNNs, since in normal, dense NNs we have that each neuron is connected to all the other neurons of the previous layer. 
 
@@ -107,17 +107,17 @@ This one is interesting since it proves again that we dont a long stack of deep 
 This net also uses very a big kernel (11x11), while now the standard is basically using a 3x3 kernel.  
 
 #### VGG
-![[VGG.png]]
+![[vgg.png]]
 
 ## Inception modules
 Inception modules re-combine together results and try to resythesize together new features. 
-![[inception_module.png]]
+![[inception-module.png]]
 As we can see from this image, you are basically applying some different operations, which are then stacked together along the channel dimension (through concatenation). 
 
 ### Inception hypothesis and Depthwise Separable Convolution
 Remember that normal convolutional kernels are 3D, _simultaneously_ mapping _cross-channel correlations_ and _spatial correlations_. It can be better to decouple them, independently looking for cross-channel correlations (via 1 × 1 convolutions), and spatial 2D convolutions.
 This operation is illustrated in the following picture:
-![[inception_hypotesis.png]]
+![[inception-hypotesis.png]]
 In Deptwise Separable Convolutions, we have a kernel for each channel, which is applied separately. Each kernel produces a single output, so the number of feature maps in input is the same as the number of features map in output.
 We then reduce the number of feature maps (called $C_{out}$) through a single unary convolution.
 
