@@ -1,5 +1,7 @@
 # Exam information
 
+(notes by [**Simone Montali**](monta.li))
+
 We can perform an **oral examination** or a **project**.
 
 ## Square kilometer array
