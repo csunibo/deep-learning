@@ -53,7 +53,8 @@ We have to answer to these questions first though:
 
 
 ### Learning rate
-The _dimension of the step_ in the direction of the gradient is the so called _learning rate_, traditionally denoted with $µ$.
+<<<<<<< HEAD
+The _dimension of the step_ in the direction of the gradient is the so called _learning rate_, traditionally denoted with $\mu$.
 $$w \leftarrow w - \mu \nabla L(w)$$
 The learning rate is an hyperparameter that can be configured by the user. Its evolution during training is governed by software components called _optimizers_ (more about them later).
 
@@ -62,7 +63,7 @@ The learning rate is an hyperparameter that can be configured by the user. Its e
 ### Examples
 
 ##### Linear regression example (fitting a line)
-We want to fit a line through a set of points $<x_i , y_i>$. 
+We want to fit a line through a set of points $\langle x_i, y_i \rangle$. 
 
 - Model: a line $y = ax + b$
 - Loss: $1/2 * \sum_i (y_i - (ax_i + b))^2$
