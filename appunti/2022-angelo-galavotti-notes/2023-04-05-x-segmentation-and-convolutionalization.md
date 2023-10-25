@@ -4,10 +4,10 @@ _Segmentation_ is an image processing topic which focuses on dividing an image i
 
 ### Semantic Segmentation
 __Semantic segmentation__: classify each pixel in an image according to the object category it belongs to.
-![](semantic-seg.png)
+![](images/semantic-seg.png)
 Building supervised training set is expensive, since it requires a complex human operation.
 The _label is itself an image_, with a different color for each category:
-![](segmentation-example-2.png)
+![](images/segmentation-example-2.png)
 For this reason, semantic segmentation can be regarded as a special case of Image-to-image transformation.
 
 # Convolutionalization
@@ -25,5 +25,5 @@ $D_0 = 11$ is the dimension of the compund kernel, aka its “_receptive fields_
 
 ### What breaks convolutionality
 Let us consider a typical architecture for image classification such as Inception V3:
-![](inceptionv3.png)
+![](images/inceptionv3.png)
 Composing convolutional layers we still get a convolutional network. What breaks convolutionality are the _dense layers_ at the end of networks (if maxpooling has a fixed pooling dimension).

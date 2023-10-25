@@ -30,7 +30,7 @@ This form of iteration over data can be understood as a way of _progressive lear
 
 ## Gradient descent (again)
 
-![](gradient-descent-example.png)
+![](images/gradient-descent-example.png)
 
 - backpropagation is applied
 
@@ -41,19 +41,19 @@ This form of iteration over data can be understood as a way of _progressive lear
 - _supervised learning_: inputs + outputs (labels)
   - classification
   - regression
-    ![](supervised.png)
+    ![](images/supervised.png)
 - _unsupervised learning_: just inputs
   - clustering
   - component analysis
   - anomaly detection
   - autoencoding
-    ![](unsupervised.png)
+    ![](images/unsupervised.png)
 - _reinforcement learning_: actions and rewards - learning long-term gains - planning - Sometimes, you have local rewards - The purpose is not to optimize the local reward, but the future locative reward, since we are not just interested only in the current situation, but rather in all the future evolutions of the agents.
-  ![](reinforcement.png)
+  ![](images/reinforcement.png)
 
 ### Classification vs. Regression
 
-![](screenshot-20230221-100242.png)
+![](images/screenshot-20230221-100242.png)
 
 ### Many different techniques
 
@@ -62,7 +62,7 @@ This form of iteration over data can be understood as a way of _progressive lear
 ## Neural Networks
 
 It's a network of artificial neuron:
-![](neural-networks.png)
+![](images/neural-networks.png)
 Each neuron takes multiple inputs and produces a single output (that can be passed as input to many other neurons).
 
 We have an input layer, an output layer, an a set of hidden layers.
@@ -71,7 +71,7 @@ If a network has only one hidden layer, it is called a shallow networks, but if 
 
 ### Artificial neuron
 
-![](artificial-neuron.png)
+![](images/artificial-neuron.png)
 
 We have a linear combination of the inputs, which is in turn given to an **activation function** (i.e. a sigmoid).
 **Each neuron** implements a _logistic regressor_: $$\sigma(wx +b)$$Machine learning tells us that the logistic regression is a valid technique.
@@ -83,14 +83,14 @@ We use a linear combination since we want to keep each node simple: computing th
 #### Different activation functions
 
 Each _activation function_ is responsible for _threshold triggering_.
-![](activation-functions.png)
+![](images/activation-functions.png)
 
 Activation functions introduce non-linearity (?)
 The sigmoid function is a kind of approximation of a threshold, binary function.
 
 ### The real, cortical neuron
 
-![](real-neuron.png)
+![](images/real-neuron.png)
 The neuron has a dendritic tree, which ends in the sinapses. Each dendritic tree is a set of weighted inputs, which are combined. When a triggering threshold is exceeded, the Axon Hillock generates an impulse that gets transmitted through the axon to other neurons.
 
 - Otherwise, if the sum is below a certain threshold, then it is blocked.
@@ -98,7 +98,7 @@ The neuron has a dendritic tree, which ends in the sinapses. Each dendritic tree
 ### Comparisons
 
 - ANN vs real neuron
-  ![](neuron-comparison.png)
+  ![](images/neuron-comparison.png)
 
 - The human brain has a number
 - The human brain is not so fast since it is not an electrical transmission, but rather a chemical reaction. The switching time is 0.001 s.
@@ -147,6 +147,6 @@ The kernel is shifted (moved to the next position, slided to the next position o
 
 - This operation is called **convolution**.
 
-![](convolutional-layer.png)
+![](images/convolutional-layer.png)
 
 ## Parameters and hyper-parameters

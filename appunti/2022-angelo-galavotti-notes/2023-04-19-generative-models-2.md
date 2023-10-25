@@ -1,11 +1,11 @@
 # GAN
 As we know, in a GAN, we want to train a generator, and then, we want to generate data that  is similar to what is present in our dataset.  
 We then have a discriminator network, which  will output 0 or 1 accordingly. 
-![](gan.png)
+![](images/gan.png)
 
 #### GAN's loss function
 From a mathematical standpoint, we could see this process as a MinMax game:
-![](minmax-gan.png)
+![](images/minmax-gan.png)
 The loss functoin has 2 parts:
 1. negative cross entropy of the discriminator w.r.t the true data distribution 
 2. negative cross entropy of the “false” discriminator w.r.t the fake generator. 
@@ -18,7 +18,7 @@ We could see this process as having a student (generator) and a teacher (discrim
 
 ### Example 
 In this example, we have a Green curve (associated with our generator/generated data) and a black curve (associated to the real data distribution). We could see the line $x$ as the latent space, while the line $z$ is the real data distribution.
-![](gan-graph.png)
+![](images/gan-graph.png)
 One problem: since the purpose of the generator is just to fool the discriminator, the generator could find _a single picture_ that would _fool the discriminator_ and always choose that picture, ingnoring the other points in the latent space, so there's no guarantees that its generations will be varied. This is called the __Mode Collapse problem__.
 We will see later how to solve this.  
 
@@ -36,7 +36,7 @@ So, essentially, _GANs images arent subject to the manifold problem_.
 
 # Latent space exploration
 Small movements in the latent space can result in some small modification in the visible image. 
-![](latent-space-exploration.png)
+![](images/latent-space-exploration.png)
 For example, what if we wanted to transform a picture of a cat into a picture of a dog, we take all the latent representation of cats that we know, and we find the hyperplane which separates the pictures of the dogs from the picture of the cats. 
 After that, we move into the perpendicular direction of the hyperplane. 
 
@@ -47,11 +47,11 @@ One of the problem of latent exploration/modification of attributes is that many
 - i.e. the transformation that allows a picture to have glasses makes also the person older etc.
 
 When there is more than one attribute, editing one may affect another since some semantics can be coupled with each other (entanglement). To achieve more precise control (disentanglement), we can use _projections_ to force the _different directions of variation to be __orthogonal__ to each other_.
-![](disentanglement-projection.png)
+![](images/disentanglement-projection.png)
 
 ## Comparing spaces
 Another cool experiment is the comparison of latent spaces between GANs.
-![](comparing-spaces.png)
+![](images/comparing-spaces.png)
 Frequently, we can map the latent space of the same GAN (trained differently) by using a simple linear mapping, and preserving most of the content. 
 
 The organization of the latent space seems to be independent from 
@@ -62,7 +62,7 @@ The map can be defined by a small set of points common to the two spaces: _the s
 The latent space mostly depends on the dataset. 
 
 # Diffusion Models 
-![](diffusion-models-1.png)
+![](images/diffusion-models-1.png)
 In diffusion models, we have to do the reverse of what is called a __forward diffusion process__. In this type of processes, we essentially are distributing loss on a matrix of pixel, so by reversing that we are instead _denoising_ the image. 
 
 After the image is denoised, we restart from this guess of what the real image would be, and then we reinject the noise at a smaller rate an we try to remove the noise again. 
@@ -77,7 +77,7 @@ The denoising network takes in input:
 and try to _predict the noise_ in it:
 $$\epsilon_{\theta}(x_t, \alpha_t)$$
 The predicted image would be:
-![](predicted-image-formula.png)
+![](images/predicted-image-formula.png)
 
 In other words, it receives in input a noise quantity and tries to remove that quantity of noise from the image. 
 
@@ -86,7 +86,7 @@ In other words, it receives in input a noise quantity and tries to remove that q
 - consider a signal ratio $α_t$
 - generate a random noise $\epsilon \sim N(0,1)$
 - generate a _noisy version_ $x_t$ of $x_0$ defined as
-![](train-diff1.png)
+![](images/train-diff1.png)
 - let the network predict the noise $\epsilon_θ(x_t, α_t)$ from the noisy image $x_t$ and the signal ratio $α_t$
 - train the network to _minimize the prediction error_, namely $||\epsilon - \epsilon_θ (x_t, \alpha_t)||$
 	- meaning, the actual noise minus what was predicted.  
@@ -98,9 +98,9 @@ With $T$ as the number of steps:
 - for $t$ in $T...1$ do: 
 	- compute the predicted error $\epsilon_θ(x_t , α_t)$ 
 	- compute the current approximation of the result, that is the predicted image formula:
-		![](predicted-image-formula.png)
+		![](images/predicted-image-formula.png)
 	- obtain $x_{t−1}$ reinjecting noise at rate $α_{t−1}$, namely
-		![](noise-reinject.png)
+		![](images/noise-reinject.png)
 
 ## A network for denoising 
 Use a (conditional) Unet, since it is very good for image to image transformations. 

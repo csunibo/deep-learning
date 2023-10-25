@@ -31,13 +31,13 @@ Let's take for example the idea of coloring an image. In this case, there are ma
 
 ### Latent variables models
 In __latent variable models__ we express the probability of a _data point_ $X$ through __marginalization__ over a vector of _latent variables_:
-![](marginalization.png)
+![](images/marginalization.png)
 
 The generator computes the probability conditioned on a _vector of latent variables_ $z$ (which could be, for example, the internal representation of a face). 
 These latent variables capture important but _hidden information_ or patterns that are not explicitly measured or recorded.
 Essentially, $z$ could be seen as an internal representation of $X$.
 $z$ is _distributed with a known prior distribution_ $P(z)$.
-![](generator-z.png)
+![](images/generator-z.png)
 As we can see, $P(z)$ is passed to the generator, which in turn generates a possible sample $\hat X$ that belongs in the distribution. $z$ is also called latent representation (or latent encoding), while $\hat X$ is called also visible representation. 
 Typically, the generator is a _deterministic component_.
 
@@ -45,7 +45,7 @@ Typically, the generator is a _deterministic component_.
 > This simply means that we try to learn a way to sample X starting from a vector of values $z$ (this happens in the generator, which is $P(X|z)$), where $z$ is _distributed with a known prior distribution_ $P(z)$. z is the latent encoding of X.
 
 #### Dimensions of latent space and visible space
-![](latent-space-encoding.png)
+![](images/latent-space-encoding.png)
 
 The Visible space is a huge space (i.e. for an image of dimensions 64x64, the dimension of the space 64x64x3 (since we have to consider the colors also)). 
 The dimension of the _latent space_, instead, could be _much smaller_, since the [[2023-04-04 - The data manifold & autoencoders#Data Manifold|manifold) that we want to reach is very small compared to the whole visible space dimension.
@@ -63,7 +63,7 @@ Each model also differs in the way the _generator_ is trained.
 
 ## VAE - Variational AutoEncoders
 To train a generator in a VAE, you couple a generator with an __encoder__, thus producing a _latent encoding $z$ given $X$_. This will be distributed according to an _inference distribution_ (a statistical deduction) $Q(z|X)$.
-![](vae.png)
+![](images/vae.png)
 
 It basically tries to "reconstruct" the input image, so in that way it kinda works like an [[2023-04-04 - The data manifold & autoencoders#What is an autoencoder?|autoencoder).
 The different wrt to autoencoders is that we cannot use them for generators, since we do not know _how $z$ is distributed inside the latent space_ (using only autoencoders). So, for example we may pick a point of the latent space which is outside the manifold, and thus we may sample a bad image. 
@@ -77,7 +77,7 @@ And is the sum of these 2 components.
 ## GAN - Generative Adversarial Network 
 The GAN approach is completely different. In a Generative Adversarial Network, the generator is coupled with a _discriminator_, trying to ==tell apart real data from fake data== produced by the generator.
 Detector and Generator are trained together _alternatively_ (when you train the generator you freeze the discriminator and viceversa).
-![](gan-example.png)
+![](images/gan-example.png)
 The loss function aims to: 
 - instruct the _detector_ to _spot_ the _generator_.
 - instruct the _generator_ to _fool_ the _detector_.
@@ -87,7 +87,7 @@ Usually, GAN produces better results than VAE.
 
 ## Normalizing Flows 
 In Normalizing Flows, the _generator_ is _split_ into a ==long chain of _invertible_ transformations==, so you can essentially go back and invert the transformation. 
-![](normalizing-flows.png)
+![](images/normalizing-flows.png)
 As you may remember, the Normalizing Flow is a _dimension preserving model_, so the latent space is the same dimension as the visible space. What we're doing is trying to apply some transformations to the latent space to obtain the visible space.  
 
 The network is trained by _maximizing log-likelihood_. 
@@ -96,7 +96,7 @@ The network is trained by _maximizing log-likelihood_.
 
 ## Diffusion Models 
 In Diffusion Models, the _latent space_ is understood as _a strongly noised version of the image_ to be generated. The generator is split into a long chain of denoising steps, where each step $t$ _attempts to remove Gaussian noise_ with a given variance $σ_t$ .
-![](diffusion-models.png)
+![](images/diffusion-models.png)
 We train a single network implementing the denoising operation, parametric in $σ_t$.
 
 This method uses _Reverse Diffusion_, where Diffusion is a technique which essentially aims to add and distribute noise to an image. 
@@ -106,13 +106,13 @@ Usually, these models start from a very small image (i.e. 64x64 resolution) and 
 # VAE in depth
 An autoencoder is a net trained to reconstruct input data out of a learned internal representation (e.g. minimizing quadratic distance)
 The idea is to use the encoder like a traditional generator in a way. 
-![](vae2.png)
+![](images/vae2.png)
 Can we use the decoder (aka the single autoencoder) to generate data by sampling in the latent space? No, since we do not know the distribution of latent variables.
 So, in a way, we need some control inside of the latent space, and thus we try to _force the latent variables_ to have a __Spherical Gaussian Distribution__. 
-![](vae3.png)
+![](images/vae3.png)
 
 We assume $Q(z|X)$ has a Gaussian distribution $G(µ(X), σ(X))$ with different moments for each different input $X$.
-![](vae4.png)
+![](images/vae4.png)
 
 The values $µ(X), σ(X)$ are both _computed by the generator_, that is hence _returning an encoding_ $z = µ(X)$ (the enconding corresponds to the mean) and a _variance_ $σ(X)$ around it, expressing the portion of the latent space that is essentially encoding ==an information similar to $X$==.
 
@@ -120,7 +120,7 @@ The values $µ(X), σ(X)$ are both _computed by the generator_, that is hence _r
 ==During training==, we sample around $µ(X)$ with the computed $σ(X)$ before passing the value to the decoder. Here essentially what that means:
 - Suppose that for the data $X_2$, we know its mean and its variance $\sigma$. Using the variance, _we sample_ around it [the dotted circle in the picture] and we find in this neighbourhood an image that is very much similar to $X_2$.  
 - This is done before _passing_ the value _to the decoder_. 
-![](vae-latent.png)
+![](images/vae-latent.png)
 After we pass the value to the decoder, we expect to be able to decode the same image that we received as input. 
 
 This process is important for 2 reasons:
@@ -128,7 +128,7 @@ This process is important for 2 reasons:
 2. Among other things, the sampling that we do using the varians _adds noise to the encoding_, and so it improves the robustness of the model. 
 
 ### The full picture of VAE
-![](vae-final-picture.png)
+![](images/vae-final-picture.png)
 We also have 2 losses:
 1. The __reconstruction error__ of the input from the output.
 2. The __Kullback-Leiber component__, which is just the distance between the 2 gaussian distribution $N(0,1)$ and $Q(z|X)$

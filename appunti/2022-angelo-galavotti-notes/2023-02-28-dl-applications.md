@@ -8,6 +8,6 @@
  
 ## Generative modeling
 Train a _generator_ able to sample original data similar to those in the training set, implicitly learning the _distribution of data_.
-![](generator.png)
+![](images/generator.png)
 - the randomicity of the generator is provided by a _random seed_ (noise) received as input. 
 -
