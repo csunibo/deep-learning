@@ -25,5 +25,5 @@ $D_0 = 11$ is the dimension of the compund kernel, aka its “_receptive fields_
 
 ### What breaks convolutionality
 Let us consider a typical architecture for image classification such as Inception V3:
-![](images/inceptionv3.png)
+![](images/inceptionv-3.png)
 Composing convolutional layers we still get a convolutional network. What breaks convolutionality are the _dense layers_ at the end of networks (if maxpooling has a fixed pooling dimension).

@@ -7,7 +7,7 @@ Every single classification technique, not just NN, is vulnerable.
 - if data occupies a low-dimensional portion in the feature space, it is easy to _modify features_, to pass the borders of our discrimination boundaries.
 
 Let's consider this neural network, Inception V3, which is used for image processing:
-![](images/inceptionv3.png)
+![](images/inceptionv-3.png)
 
 This kind of network has
 - a long sequence of convolutional layers, possibly organized in suitable modules (e.g. inception modules) 

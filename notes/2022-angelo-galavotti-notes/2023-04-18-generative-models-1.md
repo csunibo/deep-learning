@@ -106,13 +106,13 @@ Usually, these models start from a very small image (i.e. 64x64 resolution) and 
 # VAE in depth
 An autoencoder is a net trained to reconstruct input data out of a learned internal representation (e.g. minimizing quadratic distance)
 The idea is to use the encoder like a traditional generator in a way. 
-![](images/vae2.png)
+![](images/vae-2.png)
 Can we use the decoder (aka the single autoencoder) to generate data by sampling in the latent space? No, since we do not know the distribution of latent variables.
 So, in a way, we need some control inside of the latent space, and thus we try to _force the latent variables_ to have a __Spherical Gaussian Distribution__. 
-![](images/vae3.png)
+![](images/vae-3.png)
 
 We assume $Q(z|X)$ has a Gaussian distribution $G(µ(X), σ(X))$ with different moments for each different input $X$.
-![](images/vae4.png)
+![](images/vae-4.png)
 
 The values $µ(X), σ(X)$ are both _computed by the generator_, that is hence _returning an encoding_ $z = µ(X)$ (the enconding corresponds to the mean) and a _variance_ $σ(X)$ around it, expressing the portion of the latent space that is essentially encoding ==an information similar to $X$==.
 

@@ -86,7 +86,7 @@ In other words, it receives in input a noise quantity and tries to remove that q
 - consider a signal ratio $α_t$
 - generate a random noise $\epsilon \sim N(0,1)$
 - generate a _noisy version_ $x_t$ of $x_0$ defined as
-![](images/train-diff1.png)
+![](images/train-diff-1.png)
 - let the network predict the noise $\epsilon_θ(x_t, α_t)$ from the noisy image $x_t$ and the signal ratio $α_t$
 - train the network to _minimize the prediction error_, namely $||\epsilon - \epsilon_θ (x_t, \alpha_t)||$
 	- meaning, the actual noise minus what was predicted.  

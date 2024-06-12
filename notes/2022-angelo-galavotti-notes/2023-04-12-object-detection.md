@@ -79,19 +79,19 @@ In YOLO, $λ_{coord} = 5$ and $λ_{noobj} = 0.5$.
 
 ## Multi scale processing
 Here's an overview of image processing techniques for object detection throughout history. 
-![](images/image-pyramid1.png)
+![](images/image-pyramid-1.png)
 - The older approach to object detection from the 2010s used a __featurized image pyramid__. With this approach, features are computed on each of the image scales independently, which is _slow_.
 	- Essentially, images were scaled and rescaled multiple times in order to find the important features of the image.
 
 - First systems for fast object detection (like YOLO v1) opted to use only higher level features at the _smallest scale_ (__single feature map__). This usually _compromises detection of small objects_.
-![](images/image-pyramid2.png)
+![](images/image-pyramid-2.png)
 - An alternative (Single Shot Detector - SSD) is to reuse the _pyramidal feature hierarchy_ computed by a ConvNet as if it were a _featurized image pyramid_.
 - Modern Systems (FPN, RetinaNet, YOLOv3) recombine features along a __backward pathway__. This is as fast as (b) and (c), but more accurate. 
 
 In the figures, feature maps are indicated by blue outlines and thicker outlines denote semantically stronger features.
 
 #### Featurized Image Pyramid
-![](images/image-pyramid3.png)
+![](images/image-pyramid-3.png)
 - Bottom-up pathway is the normal feedforward computation. 
 - _Top-down_ pathway goes in the inverse direction, adding coarse but _semantically stronger feature maps_ back into the previous pyramid levels of a larger size via lateral connections.
 	- First, the higher-level features are _spatially upsampled_. 

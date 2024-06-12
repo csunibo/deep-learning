@@ -52,7 +52,7 @@ We need to specify the initial activity state of all the _hidden_ and _output un
 - adjust the initial states by following the negative gradient. 
 
 ## Long-Short Term Memory (LSTM)
-![](images/lstm1.png)
+![](images/lstm-1.png)
 Both the vector of inputs and the vector of outputs have the same length $t$.
 
 ### A simple, traditional RNN
